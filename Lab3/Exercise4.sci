@@ -83,3 +83,38 @@ x2origin = 3;
 [yn, yorigin] = add(x1n, x1origin, x2n, x2origin);
 disp(yn);
 disp(yorigin);
+
+n_x1 = (1 : size(x1n, '*')) - x1origin;
+n_x2 = (1 : size(x2n, '*')) - x2origin;
+n_y = (1 : size(yn, '*')) - yorigin;
+
+timeMin = min([min(n_x1), min(n_x2), min(n_y)]);
+timeMax = max([max(n_x1), max(n_x2), max(n_y)]);
+timeLimit = [timeMin, timeMax];
+Amin = min([min(x1n), min(x2n), min(yn)]);
+Amax = max([max(x1n), max(x2n), max(yn)]);
+ALimit = [Amin, Amax];
+
+subplot(3, 1, 1);
+plot2d3(n_x1, x1n);
+plot(n_x1, x1n, "ro");
+gca().data_bounds = [timeMin - 1, Amin - 1; timeMax + 1, Amax + 1];
+title("Original signal x1(n)");
+xlabel("n"); ylabel("Aplitude");
+xgrid(color('gray'));
+
+subplot(3, 1, 2);
+plot2d3(n_x2, x2n);
+plot(n_x2, x2n, "ro");
+gca().data_bounds = [timeMin - 1, Amin - 1; timeMax + 1, Amax + 1];
+title("Original signal x2(n)");
+xlabel("n"); ylabel("Aplitude");
+xgrid(color('gray'));
+
+subplot(3, 1, 3);
+plot2d3(n_y, yn);
+plot(n_y, yn, "ro");
+gca().data_bounds = [timeMin - 1, Amin - 1; timeMax + 1, Amax + 1];
+title("Sum signal y(n) = x1(n) + x2(n)");
+xlabel("n"); ylabel("Aplitude");
+xgrid(color('gray'));
