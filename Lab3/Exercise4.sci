@@ -26,7 +26,6 @@ function [yn, yorigin] = add(x1n, x1origin, x2n, x2origin)
     if x1origin < x2origin then
         yorigin = x2origin;
 
-        //x1new = zeroFront(x1n, gap);
         x1n = zeroFront(x1n, gap);
         disp("ZeroFront x1n = ");
         disp(x1n);
