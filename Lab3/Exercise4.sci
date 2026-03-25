@@ -41,12 +41,7 @@ function [yn, yorigin] = add(x1n, x1origin, x2n, x2origin)
             disp("ZeroBack x1n = ");
             disp(x1n);
         end
-        
-        //yn = x2new + x1new;
-        yn = x2n + x1n;
-
-    elseif x2origin < x1origin then
-    //else 
+    elseif x2origin < x1origin then 
         yorigin = x1origin;
         
         x2n = zeroFront(x2n, gap);
@@ -63,18 +58,28 @@ function [yn, yorigin] = add(x1n, x1origin, x2n, x2origin)
             disp("ZeroBack x2n = ");
             disp(x2n);
         end
-        
-        yn = x2n + x1n;
-    //else
-        
+    else
+        yorigin = x1origin;
+        denta = length(x1n) - length(x2n);
+        if (denta > 0) then
+            x2n = zeroBack(x2n, denta);
+            disp("ZeroBack x2n = ");
+            disp(x2n);
+        elseif denta < 0 then
+            x1n = zeroBack(x1n, -denta);
+            disp("ZeroBack x1n = ");
+            disp(x1n);
+        end                    
     end
+    
+    yn = x1n + x2n;
     
 endfunction
 
-x2n = [1, 2, 3, 4, 5];
+x1n = [1, 2, 3, 4, 5];
+x1origin = 3;
+x2n = [0, 1, 2, 3];
 x2origin = 3;
-x1n = [0, 1, 2, 3];
-x1origin = 4;
 [yn, yorigin] = add(x1n, x1origin, x2n, x2origin);
 disp(yn);
 disp(yorigin);
